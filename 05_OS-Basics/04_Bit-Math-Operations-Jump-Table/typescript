@@ -1,0 +1,134 @@
+Script started on 2021-05-29 13:19:06-07:00 [TERM="xterm" TTY="/dev/pts/23" COLUMNS="146" LINES="36"]
+rfilgas@ada:~/CS201/program_4$ ls
+a4.c  Makefile	typescript
+rfilgas@ada:~/CS201/program_4$ make
+gcc   a4.c -o a4 -lm -g -Wall
+rfilgas@ada:~/CS201/program_4$ ./a4 0x10 4
+0. Exit
+1. Addition
+2. Subtraction
+3. Multiplication
+4. Division
+5. Modulo
+6. Reverse Input
+
+Menu item: 0
+Goodbye!
+
+rfilgas@ada:~/CS201/program_4$ ./a4 0x10 4
+0. Exit
+1. Addition
+2. Subtraction
+3. Multiplication
+4. Division
+5. Modulo
+6. Reverse Input
+
+Menu item: 1
+16 + 4 = 20
+
+0. Exit
+1. Addition
+2. Subtraction
+3. Multiplication
+4. Division
+5. Modulo
+6. Reverse Input
+
+Menu item: 2
+16 - 4 = 12
+
+0. Exit
+1. Addition
+2. Subtraction
+3. Multiplication
+4. Division
+5. Modulo
+6. Reverse Input
+
+Menu item: 3
+16 * 4 = 64
+
+0. Exit
+1. Addition
+2. Subtraction
+3. Multiplication
+4. Division
+5. Modulo
+6. Reverse Input
+
+Menu item: 4
+16 / 4 = 4.000000
+
+0. Exit
+1. Addition
+2. Subtraction
+3. Multiplication
+4. Division
+5. Modulo
+6. Reverse Input
+
+Menu item: 5
+16 mod 4 = 0
+
+0. Exit
+1. Addition
+2. Subtraction
+3. Multiplication
+4. Division
+5. Modulo
+6. Reverse Input
+
+Menu item: 6
+4 01x0 
+
+0. Exit
+1. Addition
+2. Subtraction
+3. Multiplication
+4. Division
+5. Modulo
+6. Reverse Input
+
+Menu item: 7
+
+Invalid entry. Please enter an integer between 0 and 6.
+
+0. Exit
+1. Addition
+2. Subtraction
+3. Multiplication
+4. Division
+5. Modulo
+6. Reverse Input
+
+Menu item: 0
+Goodbye!
+
+rfilgas@ada:~/CS201/program_4$ ./a4 0x10 4[K[K[K[K[K[K[K[K[K[K[K./a4 0x10 4[K[K[K[K[K[K0 0
+0. Exit
+1. Addition
+2. Subtraction
+3. Multiplication
+4. Division
+5. Modulo
+6. Reverse Input
+
+Menu item: 4
+0 / 0 = -nan
+
+0. Exit
+1. Addition
+2. Subtraction
+3. Multiplication
+4. Division
+5. Modulo
+6. Reverse Input
+
+Menu item: 0
+Goodbye!
+
+rfilgas@ada:~/CS201/program_4$ exit
+exit
+
+Script done on 2021-05-29 13:20:24-07:00 [COMMAND_EXIT_CODE="0"]

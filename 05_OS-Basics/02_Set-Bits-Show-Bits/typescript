@@ -1,0 +1,15 @@
+Script started on 2021-04-26 23:35:50-07:00 [TERM="xterm" TTY="/dev/pts/38" COLUMNS="72" LINES="36"]
+rfilgas@ada:~/CS201/program_2$ make
+gcc   setBits.c -o setBits 
+gcc   showBits.c -o showBits 
+rfilgas@ada:~/CS201/program_2$ makeexitmakevim *.c -p./showBits 0xFF00FF00make[Krm showBitsls[Krm showBits[7Pmake./showBits 0xFF00FF00make[Krm showBitsls[Kclear./showBits 0xFF00FF00make[K./showBits 0xFF00FF00clear[K[3Plsrm showBits[7Pmake./showBits 0xFF00FF00[11Pvim *.c -p[6Pmakeexitmake[K./setBits 16 17 18 12
+./setBits: Argument 16 format error. Not in valid range [0 .. 15]
+rfilgas@ada:~/CS201/program_2$ ./setBits 3 13 8 14 15
+1110000100001000rfilgas@ada:~/CS201/program_2$ ./setBits 3 13 8 14 15[K[K[K[K[K11 2 4
+0010100100011100rfilgas@ada:~/CS201/program_2$ ./"showBits 0xFF00FF00"[1P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+Error: please provide two hexadecimal numbers as arguments to the program.rfilgas@ada:~/CS201/program_2$ ./"showBits 0x0F 0x05"[K[C[1P
+Bits: 0, 2,  in common. Hexadecimal: 5, Signed: 5, Unsigned: 5.rfilgas@ada:~/CS201/program_2$ ./showBits 0xE0C874A3 0xD49157FF
+Bits: 0, 1, 5, 7, 10, 12, 14, 23, 30, 31,  in common. Hexadecimal: c08054a3, Signed: -1065331549, Unsigned: 3229635747.rfilgas@ada:~/CS201/program_2$ exit
+exit
+
+Script done on 2021-04-26 23:41:39-07:00 [COMMAND_EXIT_CODE="0"]

@@ -1,0 +1,41 @@
+Script started on 2021-05-10 10:00:55-07:00 [TERM="xterm" TTY="/dev/pts/5" COLUMNS="109" LINES="89"]
+rfilgas@rita:~/CS201/program_3$ make
+gcc   fp_parse.c -o fp_parse -lm
+rfilgas@rita:~/CS201/program_3$ ./fp_parse
+./fp_parse: Usage: fp_parse <# of frac_bits> <# of exp_bits>
+rfilgas@rita:~/CS201/program_3$ ./fp_parse 11 4 33f
+./fp_parse: Invalid number of fraction bits(11). Should be between 2 and 10.
+rfilgas@rita:~/CS201/program_3$ ./fp_parse 4 8 33f
+./fp_parse: Invalid number of exponent bits(8). Should be between 3 and 5.
+rfilgas@rita:~/CS201/program_3$ ./fp_parse 3 3 a334
+./fp_parse: Number a334 exceeds maximum number of bits.Only 7 allowed here.
+rfilgas@rita:~/CS201/program_3$ ./fp_parse 3 4 23skidoo
+./fp_parse: Correct values for exponent and fraction bit but 3rd argument is not a valid hexadecimal number.
+rfilgas@rita:~/CS201/program_3$ ./fp_parse 4 4 1af
+-15.500000
+rfilgas@rita:~/CS201/program_3$ ./fp_parse 4 4 af
+15.500000
+rfilgas@rita:~/CS201/program_3$ ./fp_parse 3 3 3c
+NaN
+rfilgas@rita:~/CS201/program_3$ ./fp_parse 3 3 38
++inf
+rfilgas@rita:~/CS201/program_3$ ./fp_parse 3 3 78
+-inf
+rfilgas@rita:~/CS201/program_3$ ./fp_parse 3 3 26
+3.500000
+rfilgas@rita:~/CS201/program_3$ ./fp_parse 3 3 18
+1.000000
+rfilgas@rita:~/CS201/program_3$ ./fp_parse 3 3 3f
+NaN
+rfilgas@rita:~/CS201/program_3$ ./fp_parse 3 3 37
+15.000000
+rfilgas@rita:~/CS201/program_3$ ./fp_parse 4 4 0
+0.000000
+rfilgas@rita:~/CS201/program_3$ ./fp_parse 4 4 100
+-0.000000
+rfilgas@rita:~/CS201/program_3$ ls
+fp_parse  fp_parse.c  Makefile	typescript
+rfilgas@rita:~/CS201/program_3$ exit
+exit
+
+Script done on 2021-05-10 10:04:27-07:00 [COMMAND_EXIT_CODE="0"]

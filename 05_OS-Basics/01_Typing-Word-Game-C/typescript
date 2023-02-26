@@ -1,0 +1,66 @@
+Script started on 2021-04-07 14:23:51-07:00 [TERM="xterm" TTY="/dev/pts/1" COLUMNS="80" LINES="36"]
+rfilgas@ruby:~/CS201$ ls
+Makefile  typescript  typing_word_game.c
+rfilgas@ruby:~/CS201$ make
+gcc -m32 -Og -g -o typing_word_game  typing_word_game.c  
+rfilgas@ruby:~/CS201$ ./typing_word_game
+This is a game that tests typing speed
+
+Type the following words:
+word #1 is jumps: Th  jumps
+word #2 is fox: fox
+word #3 is brown: brown
+word #4 is over: over
+word #5 is The: The
+word #6 is lazy: lazy
+word #7 is quick: quick
+word #8 is the: the
+word #9 is dog: dog
+You took 20 seconds and 666095 microseconds
+
+rfilgas@ruby:~/CS201$ ./typing_word_game
+This is a game that tests typing speed
+
+Type the following words:
+word #1 is jumps: That was the fir   clean run. This is test #3 2.
+Please retype the word again. Note that input is case sensitive.jopers
+Please retype the word again. Note that input is case sensitive.poppers
+Please retype the word again. Note that input is case sensitive.doggo
+Please retype the word again. Note that input is case sensitive.jumps
+word #2 is dog: This is test # 3 - partial correct        ly correct words
+Please retype the word again. Note that input is case sensitive.d
+Please retype the word again. Note that input is case sensitive.do
+Please retype the word again. Note that input is case sensitive.dog
+word #3 is brown: This is test # 4 - additional letters
+Please retype the word again. Note that input is case sensitive.browndog
+Please retype the word again. Note that input is case sensitive.brownpup
+Please retype the word again. Note that input is case sensitive.brownghost
+Please retype the word again. Note that input is case sensitive.brown
+word #4 is quick: This is test # 5.    5. Extraneious input is flushed.
+Please retype the word again. Note that input is case sensitive.quick dog
+word #5 is lazy: lazy puppers
+word #6 is the: a That's all the tests! Time to type!!!
+Please retype the word again. Note that input is case sensitive.the   THE
+Please retype the word again. Note that input is case sensitive.just kidding              The
+Please retype the word again. Note that input is case sensitive.the
+word #7 is fox: FOC X
+Please retype the word again. Note that input is case sensitive.fox
+word #8 is The: the
+Please retype the word again. Note that input is case sensitive.The
+word #9 is over: Over
+Please retype the word again. Note that input is case sensitive.over
+You took 230 seconds and 623030 microseconds
+
+rfilgas@ruby:~/CS201$ The last test is included, I just forgot.[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K before I[K[K[K[K[K[K[K[Kafter I said I was done.
+
+Command 'The' not found, did you mean:
+
+  command 'he' from deb node-he (1.2.0-1)
+  command 'the' from deb the (3.3~rc1-3build1)
+
+Try: apt install <deb name>
+
+rfilgas@ruby:~/CS201$ exit
+exit
+
+Script done on 2021-04-07 14:29:26-07:00 [COMMAND_EXIT_CODE="127"]

@@ -1,0 +1,107 @@
+Ryan Filgas
+
+Algorithm to determine if user has enough time to complete weekly programming work.
+
+1. - Start entire program inside of do while loop. do {program}. Variable 'restartProgram' must be inititated as 'y'.
+
+2. - Welcome the user " Hello, welcome to the Computer Science Scheduling Calculator!"
+     2a. Introduce the problem to user: "Your professor has asked that you determine whether you
+         have enough time to complete her assignments. This will require information about
+         your schedule, and time commitments." 
+	 "There will be an opportunity to change your answers after completing questions should you make a mistake".
+
+3. - Get Program perameters (hours spent, time to implement, days until due).
+     3a. Ask user "How many hours do you expect implementing a weekly algorithm will take?"
+     3b. Read in programming time.
+     3c. Ask User "Have you already started your program?" (reply 'y' for yes or 'n' for no)"
+         3c.0. Read in as y or n. 
+         3c.1. If user says 'y' ask user: "How many hours have you worked on your program?"
+         3c.2. Read in hoursSpent, and proceed to next question.
+         3c.3. else if user says 'n', do nothing. Proceed to 2d.
+     3d. Ask user "How many days until the first program is due?"
+     3e. Read in timeRemaining.
+
+
+4. - Get Availability Information
+     4a. Tell user: "Thank you for providing assignment parameters,
+	 please provide your availability:"
+     4b. Ask user "How many hours a day are you unavailable? (for work, school, etc.)"
+     4c. Read in hoursUnavailable.
+     4d. Ask user: "How many personal hours do you need on average per day? 
+	 	    (for eat, sleep, dog walking etc.)"
+     4e. Read in personalHours.
+     4f. Ask User: "How many hours do you spend on extra curricular hobbies or entertainment?
+	 	    (tv, music, gaming etc.)"
+     4g. Read in extraCurriculars.
+     4h. Ask user: "How much time do you spend on other classes and associated homework?"
+     4i. Read in classHours.
+     4j. User input: "Please enter total number of hours spent on activities not covered".
+     4k. Read in otherHours.
+
+5. - Verify User Entries w/ Do While Loop
+     5a. Start do while loop until user answers 'n' in 5f. (if user replies 'n', they will exit loop). do:
+     5b. Tell User, "These are the values you entered, would you like to change anything? (reply 'y' for yes, or 'n' for no)"
+     5c.Display to user: 
+			"Program Parameters:"
+			"1. Programming Time (amount of hours program will take) ", programmingTime;
+			"2. Hours Spent(hours spent writing program already) ", hoursSpent;
+			"3. Time Remaining (how long until assignment is due) ", timeRemaining;
+			"4. Days until assignment is due ", daysuntilDue;
+			
+ 			"Personal Availability""
+			"5. Hours Unavailable (work, school, etc)" , hoursUnavailable;
+			"6. Personal Hours (sleep, dog walking etc.)" , personalHours;
+			"7. Extra Curriculars" (hobbies, entertainment, etc.) ", extraCurriculars;
+			"8. ClassHours (time for other classes including homework) ", classHours;
+			"9. Other Hours (catch all hours not covered by questions) ", otherHours;
+
+     5d. Read in as y or n, and set as yesOrNo.
+     5e. If y, ask user "what would you like to re-enter? (choose 1 through 9,)"
+	 4e.0. Assign requested number to variable: userChange.
+	 4e.1. if(userChange == 1):
+`	 4e.2. Tell user "please enter new number of hours for programming time":
+	 4e.3. Assign user input to variable programmingTime.
+	 4e.4 - 4e.12. [Repeat steps 4.e.1 through 4.e.3. for each question 2-9.]
+     5f. Complete do while loop: while yesOrNo == 'y';
+	       
+
+6. - Calculations:
+     6a. Calculate time remaining. timeRemaining = programming time - hours spent
+     6b. Calculate timeAvailable: (daysUntilDue * 24) - timeRemaining
+     6b. Calculate sum of time commitments: 
+	 timeCommitments = sum(hoursUnavailable, personalHours, extraCurriculars, classHours, otherHours)
+     6c. Calculate if user has enough time. netHours = timeAvailable - timeCommitments
+
+7. - Deliver results to user: 
+     7a. If netHours is positive, tell user: "Based on the information you've provided you will have (netHours) to spare!"
+     7b. If netHours is negative, tell user: "Based on the information you've provided you will need (netHours) additional 
+      			           hours to complete the assignment."
+     7c. If netHours is between zero and 1, tell user: "You will have just enough time with " netHours " to spare. Budgeting more hours is advised."
+
+6. - Ask User: "would you like to start over? (enter 'y' to restart, or 'n' to terminate program) "
+     6a. read in user input 'y' or 'n'
+     6b. If yes, tell user: "Thank you, restarting program." 
+     6c. If no, tell user: "Thank you for using the Computer Science Scheduling Calculator! Now terminating program."
+7. Complete do while loop: while programRestart == 'y' 
+8. Return 0 to end program.
+
+Variables Required in Program:
+
+programmingTime (amount of hours program will take)
+hoursSpent (hours spent writing program already)
+timeRemaining (#hours left of programming)
+daysUntilDue (days until assignment is due)
+timeAvailable (hrs until due - hours spent
+
+hoursUnavailable (work, school, etc)
+personalHours (sleep, dog walking etc.)
+extraCurriculars (hobbies, entertainment, etc.)
+classHours (time for other classes including homework)
+otherHours (catch all hours not covered by questions)
+timeCommitments (total time commitments after calculation)
+
+netHours (timeAvailable - timeCommitments)
+yesOrNo (temporary, initialize as 'y')
+userChange (to store numerical values for #5)
+programRestart (to restart the program when user answers restart question at end.)
+

@@ -1,0 +1,188 @@
+
+
+RYAN FILGAS
+
+
+CS Study Helper Algorithm - Program 4
+
+The purpose of this program is to display computer science topics to the user while gaining practical experience with classes and linear linked lists. The main portion of this program 
+will let the user choose from a list of computer science topics they may wish to learn using a do while loop, and 
+the program will display the data chosen, let them add a topic, edit the data members, or quit. The program will loop until the user
+chooses the quit option, and trips a flag variable to leave the loop.
+
+The program will be broken up into two .cpp files, and a .h file. One .cpp file will hold the concept list class, another will hold main,
+and the other will be a header file to hold prototypes, variable declarations, #includes, namespace, background info, etc.
+
+
+
+*The main .cpp file will be structured as follows:
+----------------------------------------------------------------------------------
+welcomeUser()
+do the following
+{
+    displayMenu()
+    if(user chooses to add concept)
+        addConcept();
+    if(user chooses to display a concept)
+        displayName(user entry)
+    if(user wants to display all)
+        displayAll()
+    if(user wants to edit)
+        editConcept()
+    if(user wants to quit) //Will display a question, and change a flag variable. No function necessary)
+        change flag variable to break loop
+
+}while(repeat loop until user chooses to quit, this is controlled by flag variable)
+exitMessage()
+----------------------------------------------------------------------------------
+
+
+
+*Member functions of the concept class .cpp file will be structured as follows:
+----------------------------------------------------------------------------------
+welcomeUser()
+
+The welcome user function will output:
+
+"Hello! Welcome to the CS Study Helper! This program is designed to let you
+choose a topic to learn more about, and assist you in gathering the resources to start learning! Following is a list
+of topics you might wish to learn."
+
+"To display a topic, enter 'd', then enter the topic number. To add a topic enter 'a'. To display all topics, enter 'all' (no caps). 
+To edit a topic, enter 'e', then enter the topic number. To quit, enter 'q'."
+
+-----------------------------------------------------------------------------------------------------
+displayMenu()
+
+The display menu function will display a list of concept names, gathered by accessing each first member of the concept(struct) array.
+
+1. Linear Linked Lists
+2. Recursion
+3. Classes
+4. Stacks
+
+Once the user enters an integer, the program will validate their entry, and give them another try if it's invalid.
+
+-----------------------------------------------------------------------------------------------------
+
+addconcept()
+
+The add concept function will let the user add a concept to the end of the dynamically allocated array of concepts(structs).
+Adding a concept will increment a variable to hold the size of the array, so we can access it and increment a variable for 
+the number of concepts stored.
+
+The program will ask for these responses to fill in. Responses will be charactar arrays holding the following:
+1. Topic Name
+2. Concept to work on
+3. Amount of time to complete
+4. Tools needed to complete
+5. Useful Information
+
+-------------------------------------------------------------------------------------------------------
+
+displayName()
+
+The display name function will prompt the user for the number of the concept they wish to display,
+then output each member of the concept(struct) within the concept array. It will look like the following:
+
+Concept n
+a. Topic Name
+b. Concept to work on
+c. Amount of time to complete
+d. Tools needed to complete
+e. Useful Information
+
+-------------------------------------------------------------------------------------------------------
+
+displayAll()
+
+The display all function will access each member of the of the concept(struct) array, and output all of the contents of a struct.
+Each struct will contain charactar arrays holding the following:
+
+Concept n
+a. Topic Name
+b. Concept to work on
+c. Amount of time to complete
+d. Tools needed to complete
+e. Useful Information
+
+--------------------------------------------------------------------------------------------------------
+
+editConcept()
+
+The edit concept function will prompt the user for the topic number they wish to edit, and display the following in
+a do while loop (concept will change):
+
+"You've chosen to edit topicName, enter an integer from the following to change each value"
+
+Concept 2.
+    1. Recursion
+    2. Branching Structures
+    3. 45 minutes
+    4. Read up in malik book, and use practice problems to practice in linux.
+    5. Solving a problem in terms of itself can lead to less coding, but sometimes innefficiency.
+
+After the user chooses an integer, it will display:
+
+"Please enter the replacement text as a word or sentence:"
+
+The program will then store this in the concept as the new value, and ask the user if they would like to change something
+else, or go back to the main menu. If they go back to the main menu, the loop will be broken.
+
+-----------------------------------------------------------------------------------------------------------
+
+exitMessage()
+
+The exit message will display: "Thank you for using the CS Study Helper! Goodbye."
+
+-----------------------------------------------------------------------------------------------------------
+
+The default list of concepts will be:
+
+
+Concept 1.
+    a. Linear Linked List
+    b. End Insertion
+    c. 45 Minutes
+    d. Read up on LLL in Malik book, review lab 7, and log into linux.
+    e. Potential applications include sorting, or adding items to a queue.
+
+Concept 2.
+    a. Recursion
+    b. Branching Structures
+    c. 45 minutes
+    d. Read up in malik book, and use practice problems to practice in linux.
+    e. Solving a problem in terms of itself can lead to less coding, but sometimes innefficiency.
+
+Concept 3.
+    a. Classes
+    b. Multi - File Workflow
+    c. 1 Hour
+    d. Review lab 6 & 7, read malik book, on classes, and practice in linux.
+    e. Using multiple files will make programs easier to understand, and provide
+       abstraction for operational efficiency.
+
+Concept 4.
+    a. Stacks
+    b. Definitions & Concepts
+    c. 2 Hours
+    d. Read malik book.
+    e. Understanding stacks will further provide foundation for careers in computer science.    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

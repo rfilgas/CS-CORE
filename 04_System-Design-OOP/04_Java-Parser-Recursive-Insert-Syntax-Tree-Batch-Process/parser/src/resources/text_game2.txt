@@ -1,0 +1,27 @@
+START
+
+Bag = "banana", "pudding", "slugs", "grime", "pickles"
+
+FIGHT!(Food, Name)
+
+  if Food == "orange"
+    SAY "Eat Slugs" + Name + "!"
+    THROW "slugs" >> Name
+  END
+
+  elif Food == "pickle"
+    SAY "I hate pickles!"
+    THROW "pickles" >> Name
+  END
+
+  elif Bag HAS "pudding"
+    SAY "Eat pudding dirt lickers!"
+    THROW "pudding" >> EVERYONE
+  END
+
+  else
+    SAY "We're done here!"
+    THROW Bag.VERYTHING >> EVERYONE
+  END
+
+FINISH  

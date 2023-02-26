@@ -1,0 +1,104 @@
+main function structure:
+1. Introduce User - execute introduction function to welcome user.
+2. Get sentence/list of words from user - execute getSentence to get
+   sentence from user.
+3. Get prefixes - execute getPrefixes function to get prefixes from user.
+4. Get Suffixes - execute getSuffixes function to get suffixes from user.
+5. Strip prefixes - execute stripPrefixes function to remove prefix.
+   from sentence.
+   5a. Repeat with each prefix.
+6. Strip suffixes - execute stripSuffixes function to remove suffix.
+   6a. Repeat with each suffix.
+7. Serve sentence to user with serveResults function.
+8. Ask user if they want to repeat
+9. Thank user-
+    9a.Tell user: "Thank you for using the majestic root word extractor!
+                   Would you like to restart the program?"
+    9b. Read in user input.
+    9c. If yes, tell user: "Thank you, restarting now..."
+    9d. If no, tell user: "thank you, restarting program.
+
+introduction function:
+1. Welcome user: "Welcome to the Majestic Root Word Extractor"
+2. State program purpose: "This program will take a full sentence,
+   strip each word of prefixes, and suffixes, then return the full
+   sentence in its most simplest form with root words only."
+
+getSentence function:
+
+1. Get user input:
+   1a. Ask user "Please enter a sentence or list of words you'd like 
+                 to strip down to root words and punctuation."
+   1b. Read in sentence as user input.
+   1b. Echo to user: "you entered: user sentence."
+
+getPrefixes function:
+1. Get user input:
+   1a. Ask User"Please enter in three prefixes"
+   1b. Read in prefixes.
+   1c. Echo to user: you entered in "", is this correct?
+   1d. if yes, proceed, if no, proceed to step 1a.
+
+getSuffixes function:
+1. pass the prefix and user sentence into this function.
+2. Use reverseArray function to reverse sentence.
+3. Use reverseArray function to reverse suffix.
+4. Pass reversed sentence and suffix into stripPrefix function.
+5. reverse sentence again to put it back in order.
+
+
+stripPrefix function:
+
+1. Pass the first prefix and the users sentence into this function.
+2. Use a temporary variable called tempArray to store letters from the first word 
+  of the sentence. These letters will be compared with the first prefix,
+  so the new varable should have the same numbers of letters as the prefix.
+3. Compare temporary variable to first prefix.
+  3a.If the temporary variable doesn't match the first prefix, copy the
+     letters into a new variable for a temporary sentence, and advance
+     3b. Advance counter 'j' for each letter added to the temporary sentence.
+
+
+4.Using a while loop, while the value of a counter 'i' is less than the sentence length
+  minus the affix length (indicating we're at the end of the sentence), execute
+  the following steps.
+  4a.If the affix isn't equal to the temp array, copy the value of index 'i'
+     to the sentence at the index of 'j'.
+     4a.1. Add one to'j'since a value was copied into the sentence.
+  4b. If the Affix is equal to the temp array:
+      4b.1. Advance 'i' by the length of the affix so that we're at the
+            index of the root we wish to keep.
+      4b.2. Reset temp array.if(strcmpi
+  4c. If the indexed value is a space, and the next value isn't a space:
+     4b.2. Make a new temp array with the following letters the same length
+           as the affix to compare with. 
+
+reverseArray function:
+1. Pass in a word or sentence
+2. For each letter of word/sentence, starting from the end and moving
+   towards the beginning, copy each letter to a new string where the
+   last letter of the input string becomes the first letter of the
+   new string, the second to last becomes the second, and so on, until
+   the new string becomes the reversed word/sentence.
+3. Reset the temporary sentence to an 'empty' array.
+4. Copy the new sentence into the original array to be returned from the function. 
+
+stripSuffix function:
+1. Pass the suffix, and current sentence in.
+2. Reverse the suffix with the reverseArray function.
+3. Reverse the sentence with the reverseArray function.
+4. Pass the reversed suffix and reversed sentence into the reversePrefix
+   function.
+5. Reverse the new sentence so it's again readable.
+
+serveResults function:
+
+1. Tell user: "Here is your new sentence or list without prefixes or
+   suffixes: "new sentence".
+
+thankUser:
+
+1. Tell user: "Thank you for using the majestic root word extractor!
+                Would you like to restart the program?"
+   1a. If yes, restart.
+   1b. If no, exit program.

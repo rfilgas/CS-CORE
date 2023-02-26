@@ -1,0 +1,277 @@
+
+// OPENING PROGRAMS:
+// vim *One.cpp  --- TO OPEN FILE
+// g++ *One.cpp  --- TO COMPILE
+// ./a.out       --- TO EXECUTE
+
+//Start every program with:
+
+# include <iostream>
+using namespace std;
+
+//PREPROCESSOR DIRECTIVES:
+//#define NDEBUG - disables assert function
+
+// OTHER LIBRARIES:
+// #include <cstring>   <-STRING LIBRARY
+// #include <iomanip>    --- PARAMETERIZED STREAM MANIPULATOR (SETPRECISION, SETW, SETFILL)
+// #include <fstream>    --- I/O section
+// #include <cmath>      --- math
+// #include <cassert>    --- TO TERMINATE PROGRAM WHEN CONDITION IS FALSE OR ZERO
+
+// ****************************
+// Name
+// class
+// program notes
+// ****************************
+
+// INITIATE VARIABLES (WITHIN INT MAIN UNLESS A CONSTANT)
+// float inches;
+// int numbers
+
+// DECLARING A CONSTANT:
+// const int NAME = 21;
+
+
+// int main()
+// {
+// //program body goes here
+// return 0;
+// }
+
+// INITIALIZING VARIABLES
+
+// DATA TYPES, OPERATORS, AND SYMBOLS:
+//      To make 
+//	Data types: int, char, bool, float,
+//	Logical Operators:
+//      ------------------ ! LOGICAL 'NOT'
+//	------------------ && AND
+//	------------------ || OR
+//	------------------ == EQUAL TO (USE BACKWARDS SO THAT C++ ERRORS IF 2ND '=' IS FORGOTTEN.
+//	------------------ != NOT EQUAL
+//      ------------------ <> LESS THEN, MORE THAN
+//      ------------------ <= LESS THAN OR EQUAL TO
+//      ------------------ '\n' NEW LINE
+//      ------------------ endl ENDS LINE
+//      ------------------ fabs() Find the absolute value of a floating point number (must have cmath file)
+//      ------------------ isupper DETERMINES IF UPPER CASE
+//      ------------------ toupper CHANGES TO UPPER CASE
+//      ------------------ isalpha CHECKS FOR ALPABETICAL LETTER
+//      ------------------ ? CONDITIONAL OPERATOR  max = (a >= b) ? a : b;
+//      ------------------ says if a >= b, then max = a, else max = b.
+
+// ************************************************************
+// I/O - INPUT / OUTPUT
+//
+// FILE I/O PROCESS
+// 1.Include header file for fstream
+//   #include fstream
+// 2.Declare filestream variables
+//   ifstream inData;
+//   ofstream Outdata;
+// 3.Associate the filestream variables with I/O sources.
+//   fileStreamVariable.open(sourceName);
+//   inData.open("h:\\prog.dat"); // Open the input file
+//   outData.open("prog.out");
+// 4.Use the file stream variables with >>, <<, or other I/O functions.
+//   inData >> payRate;
+// 5.Close the files.
+//   inData.close();
+//   outData.close();
+//
+// cout << --------------- to output information to the user
+// cin >>  --------------- to get input from user
+// cin.get(arrayName, SIZEofArray, '\n');
+//                                  ^^delimiter (where to stop).
+// ifstream
+// ofstreams
+// cin.putback - puts the last charactar recieved by the function get back into the input stream
+// cin.peak - returns the next charactar from the input stream, but doesn't remove it
+// cin.ignore(100, '\n'); <- Remove the delimiter after every single input operation!
+// cin.width(SIZE);
+// getline( inputStreamVariable
+// setfill('.') << left << setw(35) << "Net Sale: "; -- left will move text to left, fill will go to the right,
+// setprecision
+// fixed - outputs floating numbers in the decimal point format
+// showpoint - outputs decimal and floating zeros
+// setw -- sets width in specific columns
+// --------------------------------------
+// cout << fixed << showpoint; 
+// cout << setprecision(2); ------ sets precision to 2 decimal points
+//---------------------------------------
+//
+// ************************************************************
+
+
+//*************************************************************
+// ARRAYS
+// const int SIZE = 100;   <- This can be placed globally since it's not a variable. USE CONSTANTS, NOT VARIABLES!
+// int array[SIZE];       <- This needs to be placed inside a function since array is a "variable"
+// array[index] == 10;    <- Biggest number used is the size of the array minus one. Arrays start@ 0.
+          ^^ This has to be a constant number
+// Arrays hold a collection of the same data type. The last charactar is alwayys a terminatin null \0.
+// Arrays must be one larger than needed to store the data.
+
+// STRINGS:
+// length = strlen(array)         <- How many charactars are in the array up until the '\0'
+// strcpy(result,original,array); <- Copies the original arrays content into the result, until the '\0'
+// if(strcmp(array1,array2)       <- "Compares" the two arrays, returns zero if they are the same.
+//*************************************************************
+
+// STRUCTURES
+// Stuctures store a group of variables.
+// product one_item;   <- product is a data type we must use
+// cin >> one_item.item;
+// cout << one_item.item[0] <- access the first character of item.
+// 
+// Always pass a structure as reference.
+// product inventory[100]; makes a list of lists.
+//
+// A structure definition can look like:
+//
+//  struct storeItem
+//  {
+//  char item[20];
+//  float price
+//  int barcode;
+//  }
+//
+//
+// Never pass a structure by value! The '&' is an alias, it's very important!
+// void load_storeitem(storeitem & product);
+//
+// Structs within structs can help organize and sub organize.
+//
+// CONSTRUCTOR********  -- sets all variables within a class to a starting value.
+// course :: course()
+// {
+//   section = 0;
+// }
+//
+
+//**************************************************************
+
+//CLASSES
+//
+//
+// form:
+// 
+// class groupFunctions
+// {
+//   public:
+//     void funtion1(int, int, int); --- Function prototypes
+//     void function1(int, int, int);
+//   private:
+//     void function3(int, int, int); --- private functions are hidden from user so they can't change.
+// }
+//
+//
+// Class above would be accesed by:
+//
+//  groupFunctions.function1(1,4,5)
+//
+//
+//
+//
+//
+// CUNSTRUCTORS - to initiate values within a class.
+// the name of a cunstructor is the same as the name of the class
+// it's a function prototype that has no type
+// used like this:
+// groupFunctions(0, 0, 0); -- constructor with parameters
+// groupFunctions(); -- default constructor sets things to default
+//
+// defined like:
+//
+// groupFunctions::groupFunctions(( int hours, int minutes, int seconds)
+// {
+//    Assignment statements & if statements;
+// }
+//
+// To invoke constructor: clockType yourClock; -- |  class function;  |
+
+
+// ************************************************************
+// LOOPS
+
+// WHILE LOOP:
+// 
+// while(conditional expression)
+// { do something;
+// }
+// VARIATION: 
+// sentinel controlled loop. put a trigger at the end of a list to end while loop
+// flag controlled while loop - controlled by a boolian inside the loop
+// end of file (EOF) controlled while loop - if program reaches the end of input data, it returns false., if it reads faulty data (wrong data type), it returns false. otherwise true.
+//-------------------------------------------------
+//istreamVar.eof()
+
+// DO WHILE LOOP:
+//
+// do
+// {expression
+// }while(conditional statement);
+// 
+// checks conditional statement at end.
+//
+// 
+// FOR LOOP
+//
+// for (index; conditional statement, increment step)
+//      ^ != 0   ^<size array  ^ ++index
+// { do something; }
+
+// steps: initialize, test (conditional expression), do the body, increment.
+
+?? Valid for loop:
+// for (int cnt = 9, data =0; cnt < 5 && data < 0' ++cnt)
+
+
+//*************************************************************
+
+// SWITCH STRUCTURES
+// switch - is a type, so you can initiate something like switch (grade)
+//---------------------------------
+// switch(grade) --- initiate
+//case 'A":  ---activate switch
+//   cout << "the grade point average is 4.o"; -- do something
+//   break; --exit switch
+//---------------------------------
+// case - what case you want to react to, like an if statement
+// break - exits the switch
+// default
+
+
+//**************************************************************
+//  LINEAR LINKED LISTS(LLL)
+//  
+//
+//  *   <-- pointer
+//  ->  <-- indirect member access operator - dereferences a pointer, then allows member access.
+//  structure of a LLL is below vv
+//  Head --> data/next --> data/next --> data/next
+//  
+//  TRAVERSAL - travel to the next node without changing head.
+//  
+//  cout << head -> data;
+//  node * current = head;
+//  current = current -> next
+//  
+//  CS162/fpdemo
+//
+//**************************************************************
+
+// TERMINATE
+// assert(expression); ---- must #include cassert
+
+//**************************************************************
+// CODING PREFERENCES:
+// 1. EVERY TIME YOU READ IN, CLEAR THE DELIMITERS! ---> cin.ignore(100, '\n');
+// 2. ALWAYS ECHO BACK TO USER!
+// 3. USE == AND != AND <= ETC. BACKWARDS (E.G. 4 > variable --> not variable < 4)
+// 4. Anything non-zero is true. Instead of  if(selection == 'y'), ask if(selection !- 'n')
+// 5. Always pre-crement unless postcrement is needed. always ++variable.
+// 6. One is the opposite of zero. Zero is false, one is True
+// 7. Always use cin.ignore(100, '\n') after taking in user data.
+// 8. Don't get {} happy or ; happy.

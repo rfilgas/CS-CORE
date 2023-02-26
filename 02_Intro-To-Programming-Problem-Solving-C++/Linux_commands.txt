@@ -1,0 +1,53 @@
+//
+// LINUX COMMANDS-------------------------------------------------------------------------------------
+//
+// cd .. multiple times will take you up into root.
+// mkdir foldername   ----  make directory
+// rm -r directoryname ---  delete directory with contents
+// rm - d             ----  delete empty directory
+// cd foldername      ----  change directory
+// cd ..              ----  go up a directory
+// g++ filename.cpp   ----  compile files
+// ./a.out            ----  run file after compiling
+// !(letter)          ----  using ! will run the last thing starting with that letter
+// ls                 ----  list contents of current directory
+// ls directoryName   ----  list contents of a specific directory
+// ls directoryname[2-3] -  displays files in the directories of range 2-3.
+// *                  ----  splat or wildcard, this can be used as a shortcut in conjunction w/ type. *3.cpp might open file3.cpp
+// cat filename.txt   ----  display the contents of a file
+// cat >> copy2       ----  followed by enter, you can add text to the file by entering and hitting ^d to exit.
+// pwd                ----  display current path and directory name
+// cp source dest     ----  copy a file from source to destination.
+// cp -R ./source ./dest -  cp -R CS_Programs CS_Copy -- copies entire cs programs directory into cs copy directory.
+// cp -i              ----  adding a -i means prompt before overwrite
+
+
+
+// !!IMPORTANT!!----------------------------------------------------------------------------------------
+
+
+// rsync -uvr . ../Lab5_Backup -- rsync synchs files, u skips newer files in dest directory, v explains,
+//         source   Dest          r copies sub directories recursively
+// tar -cfv archive_name.tar *cpp  *.txt	
+
+
+
+
+//  For Program #3, CS162 will use:
+//  tar   –cvf   archive_name.tar   *.cpp   *.txt
+
+//  For Program #4 and 5, CS162 will use:
+//  tar   –cvf   archive_name.tar   *.cpp   *.h   *.txt
+
+//  • Do not archive the a.out or other object modules that may exist.
+
+// !!IMPORTANT!!----------------------------------------------------------------------------------------
+
+// mv program1.cpp new_name.cpp -- or:  mv source dest ---- MOVE DOESN'T LEAVE THE ORIGINAL FILE
+// ls -a              ----  shows hidden files
+// clear              ----  to clear file 
+// ~/CS*              ----  the tilda fills in the path to match the end name. The splat finishes the directory name.
+// man cp             ----  man accesses the manual, cp accesses the copy command and related flags.
+// 
+//
+//

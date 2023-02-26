@@ -1,0 +1,79 @@
+
+Use this to compile and run. Clear, g++, and valgrind in one.
+clear && clear && g++ *.cpp -O -g -pthread -Wall -lm && valgrind --track-origins=yes --tool=memcheck --leak-check=full ./a.out
+
+If you want valgrind to go to a logfile named "output.txt", run with this. You can also append <test_input.txt to the end to preload inputs. See bottom of file.
+clear && clear && g++ *.cpp -O -g -pthread -Wall -lm && valgrind --track-origins=yes --tool=memcheck --leak-check=full --log-file="output.txt" ./a.out 
+
+
+
+gdb -tui ./a.out
+b 18 would add a breakpoint at 18
+s step into function
+c skip to next breakpoint
+n next line ---- enter to keep going down
+p print
+disp height ---- display something to see when it changes
+
+---------------------------------------------------------------------------
+
+checkpoint - forks a process in gdb into a new instance with a particular id.
+Placing a checkpoint will let you get back to the same place you were
+before in the debugging process.
+
+restart (checkpoint-id) <-- insert checkpoint ID here 
+(This checkpoint ID starts from 0 and goes up 1 for each new process added.)
+info checkpoints - display all checkpoints
+delete checkpoint checkpoint-id   -self explanatory
+---------------------------------------------------------------------------
+To put gdb output in another terminal window so you can see what's going on in -tui mode.
+
+Use this in home directory of a separate terminal to get the number at the end.
+tty 
+
+output on seperate terminal after tty:
+/dev/pts/your_login_instance
+
+tell the terminal you want to display in to sleep
+sleep 999999
+
+in gdb use command 
+tty /dev/pts/(number retrieved goes here without the ())
+
+This will push the program output to the other terminal. When you hit continue, and you
+need to put input into the program, it will be in this separate terminal.
+
+------------------------------------------------------------------------------
+
+To stream inputs into a file, make a list. Example below. 
+Make sure there is an empty line at bottom. When using
+this method, the file is the only input that can be taken,
+so make sure to terminate, or it may cause a loop.
+1
+y
+1
+2
+3
+
+
+Use command ./a.out < testin.txt
+when the file is saved.
+
+-------------------------------------------------------------------------------
+
+To backtrace, and send to a file:
+
+(gdb)set height 0
+
+set logging on  
+
+set logging file my_file.log   
+
+show logging
+
+set logging file file ---disable logging
+set logging redirect [on|off] --- to overwrite the current log file
+
+
+To send all output to a file: run > outfile.txt
+

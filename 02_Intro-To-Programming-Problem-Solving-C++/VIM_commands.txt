@@ -1,0 +1,188 @@
+VIM Commands
+
+Rules:
+1. You can duplicate almost any command by putting a number out front:
+   10dd means delete 10 lines.
+
+BASICS-------------------------------------------------------------
+
+i    - Insert mode - needed to type
+a    - append (starts insert after selected letter).
+c    - delete line and enter insert mode
+A    - go to end of line and enter insert mode.
+o    - Make new line and enter insert mode
+ctrl + w - delete previous word without leaving insert mode
+:set nu - show line numbers
+esc  - used to leave insert mode
+:wa  - to save
+:wqa  - to save and quit
+ZZ   - save and quit
+:x   - same as wq
+:q   - quit without writing
+:xa  - save and quit all files
+
+u    - undo [count] changes.
+:u   - undo one change
+ctrl + R - redo
+:red - redo a single change
+
+U    - undo all latest changes on one line (maybe?)
+w [filename] - save file under new name
+
+MOVING-------------------------------------------------------------
+
+h   - [count] characters to the left (exclusive)
+l   - [count] characters to the right (exclusive)
+k   - [count] lines upward
+j   - [count] lines downward (linewise)
+G   - ****Goto line [count], default last line, on the first non-blank character.****
+    - 10G ges to line 10.
+rx  - r replaces the letter selected by the letter following r, in this case x.
+Ff   - go back to previous occurence of letter.
+gg  - ****Goto line [count], default first line, on the first non-blank character.***
+#[number] - same as G.vim
+
+H   - ****go to top of screen*****
+L   - ****go to bottom of screen**kj
+{   - go to start of previous block
+}   - go to start of next blockkj
+
+
+0   - to the first charactar of the line
+^   - to the first non-blank charactar
+$   - to the end of the line and [count - 1] lines downward. to the end.
+w   - forward one word
+b   - backward one word
+
+^d  -  page down
+^b  -  page up
+:50 - go to line 50
+
+
+
+
+DELETING-------------------------------------------------------------
+
+x   - delete charactar
+dw  - delete word from cursor on
+db  - delete word from the end
+d$  - delete to end of line
+R   - replace mode
+ce  - delete word and go into insert mode
+
+dd  - **********delete line********
+
+
+COPYING---------------------------------------------------------------
+
+yy   - *****yank current line (copy)
+p    - paste below cursor
+u    - undo last change
+u#   - replace hash with a number to undo multiple times.
+U    - restore line
+
+y$   - yank to the end of the current line
+yw   - yank to end of word - yank word
+5yy  - yank 5 lines
+
+ODDS AND ENDS----------------------------------------------------------
+
+.    - repeat last command
+cw   - change current word to a new word
+/[keyword] - ***to find***
+cntrl+R - redo
+%    - to find matching {[ or (
+:!   - to run shell commands like :!ls
+
+REPLACING COLUMNS------------------------------------------------------
+
+ctrl v - to select in visual mode
+c[replace text goes here]
+esc esc - hit escape twice to implement changes.
+v & shift v - to select by charactar or by line
+
+SEARCH AND REPLACE------------------------------------------------------
+
+s/replacedWord/newWord/g - replaces all words on line
+:%s/replacedWord/newWord/g - replaces all words in file without confirmation.
+:%s/replacedWord/newWord/gc - replaces on all lines but asks confirmation:
+                              y = replace, n = skip, a = this and all remaining
+							  q = quit command, l = this is the last one, quit.
+
+SEARCH ONLY--------------------------------------------------------------
+/keyword (hit enter), then 'n' for next or 'N' for previous.
+
+SPLIT SCREEN------------------------------------------------------------
+
+:bn  - switch to next buffer (next open file)
+:bp  - switch to previous buffer (file)
+:bd  - close a buffer
+:sp  - horizontal screen split
+:vsp - vertical screen split
+Ctrl + ws - Split windows horizontally
+Ctrl + wv - Split windows vertically
+Ctrl + ww - Switch between windows
+Ctrl + wq - Quit a window
+Ctrl + wh - Moves your cursor to the window to the left
+Ctrl + wl - Moves your cursor to the window to the right
+Ctrl + wj - Moves your cursor to the window below the one you're in
+Ctrl + wk - Moves your cursor to the window above the one you're in
+
+TABS--------------------------------------------------------------------
+
+:tabedit filename - opens a new tab and will take you to edit "file"
+gt    - move to the next tab
+gT    - move to the previous tab
+#gt   - move to a specific tab number (e.g. 2gt takes you to the second tab)
+:tabs - list all open tabs
+:tabclose - close a single tab
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//

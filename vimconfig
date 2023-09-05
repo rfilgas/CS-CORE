@@ -1,0 +1,481 @@
+" Disable compatibility with vi which can cause unexpected issues.
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+
+" Added IDE motions:
+" -----------------------------------------
+" - line/block shifting up/down
+" - comment lines/blocks with <leader> + /
+" - file aware tabbing
+" - Hitting enter after a first curly brace puts cursor in the code block
+
+
+" Custom Mappings
+" --------------------------------------------
+"" - Screen splitting with control + movement keys
+" - tn toggles relative vs absolute numbering
+" - Adding two quotes or brackets etc. will place cursor in the center
+" - Y yanks from cursor to end of line
+
+
+" Notes:
+" - To use backups a directory needs to be made for ~/.vim/backup
+" - The line shifting mapping should be toggled for mac vs unixr.
+" - <Leader> is currently the space bar.
+
+
+" color settings (if terminal/gui supports it)
+if &t_Co > 2 || has("gui_running")
+  syntax on
+  color desert
+  set hlsearch
+  set incsearch
+endif
+
+
+" If Vim version is equal to or greater than 7.3 enable undofile.
+" This allows you to undo changes to a file even after saving it.
+if version >= 703
+    set undodir=~/.vim/backup
+    set undofile
+    set undoreload=10000
+endif
+
+
+
+" ***********************
+" **** SCREEN SPLITS ****
+" ***********************
+hi CursorLine term=bold cterm=bold guibg=Grey40 ctermbg=none ctermfg=none
+" split navigation"
+set" splitbelow
+set splitright
+" navigate to the window below with cntrl + j
+nnoremap <C-J> <C-W><C-J>
+" navigate to the window above with ctrl + k
+nnoremap <C-K> <C-W><C-K>
+" move to the window on the right with ctrl + l"
+nnoremap <C-L> <C-W><C-L>
+" move to the window on the left with ctrl h"
+nnoremap <C-H> <C-W><C-H>
+
+
+" Enable type file detection. Vim will be able to try to detect the type of file in use.
+" "filetype indent plugin on
+
+
+" *********************
+" ******* STYLE *******
+" *********************
+
+set background=dark
+set lazyredraw          " no redraws in macros
+set confirm             " get a dialog when :q, :w, or :wq fails
+set nobackup            " no backup~ files.
+set viminfo='20,\"500   " remember copy registers after quitting in the .viminfo file -- 20 jump links, regs up to 500 lines'
+set hidden              " remember undo after quitting
+set history=50          " keep 50 lines of command history
+
+
+" ----notification----"
+set title " add file name at top
+set showmode " show mode in status bar
+set showcmd " show commands in status bar
+set visualbell " no sound on error, just flashing
+set laststatus=2 " use 2 lines for the status bar
+
+" ----search----
+set showmatch " show matching bracket
+
+
+"  ----cases----
+set ignorecase " case insensitive searching
+set smartcase " become case insensitive for upper case searches
+set backspace=indent,eol,start " allow backspacing over everything in insert mode
+set nostartofline
+set laststatus=2 " always display status
+set confirm
+
+" ----spaces----
+set smartindent " adjust auto indentation based on context
+set autoindent " auto indentation
+set smarttab " tab based on context
+set tabstop=4 " a tab counts for x spaces
+set shiftwidth=4 " spaces for autoindent"
+
+" paste mode toggle (needed when using autoindent/smartindent)
+map <F10> :set paste<CR>
+map <F11> :set nopaste<CR>
+imap <F10> <C-O>:set paste<CR>
+imap <F11> <nop>
+set pastetoggle=<F11>
+
+
+" ----lines----
+set ruler " add ruler
+set nowrap " don't wrap lines'"
+set cursorline " higlights the current line
+set number " line numbers
+
+
+" ****************************
+" **** File Type settings ****
+" ****************************
+
+
+" ----- files---
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=0# indentkeys-=<:> foldmethod=indent nofoldenable
+autocmd FileType js setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=0# indentkeys-=<:> foldmethod=indent nofoldenable
+" ----------------
+
+
+" *********************
+" *****Keymapping******
+" *********************
+"
+" Map leader defines the initializer for custom keymappings
+let mapleader = "\<space>"
+
+set esckeys  " map missed escape sequences (enables keypad keys)
+
+" Type jj to exit insert mode quickly.
+inoremap jj <Esc>"
+
+
+" **** Disabled ****"
+" no closing vim with control z - commonly used for undo and can corrupt files.
+nnoremap <c-z> <nop>
+
+
+" Typing tn toggles relative vs absolute numbers.
+nnoremap tn :call ToggleNumber()<CR>
+function! ToggleNumber()
+  if &number || &relativenumber
+    set invrelativenumber
+  else
+    set relativenumber
+  endif
+endfunction
+
+" **** AUTO INSERT ****
+" |{}| is achieved by typing }|
+" A function block is achieved by { + <enter> aka <CR> for cairrage return
+" The parens don't auto complete, they just move your cursor. 
+" To auto complete delete the right side paren on the map from side.
+inoremap "" ""<left>
+inoremap """" """"<left>
+inoremap}\|  \|{}\|<left>"
+inoremap{<CR> {<CR>}<Esc>O
+inoremap''' ''<left>
+inoremap() ()<left>
+inoremap[] []<left>
+inoremap{} {}<left>
+
+" Yank from cursor to the end of line.
+nnoremap Y y$
+
+
+" Enter visual mode and type $ + ______ then enter to surround"
+" 1: ()
+" 2: []
+" 3: {}
+" 4: |{}|
+" $: ""
+" q: ''
+" e: ``
+vnoremap 11 <esc>`>a)<esc>`<i(<esc>
+vnoremap 22 <esc>`>a]<esc>`<i[<esc>
+vnoremap 33 <esc>`>a}<esc>`<i{<esc>
+vnoremap 44 <esc>`>a}\|<esc>`<i\|{<esc>
+vnoremap $$ <esc>`>a"<esc>`<i"<esc>
+vnoremap $q <esc>`>a'<esc>`<i'<esc>
+noremap $e <esc>`>a`<esc>`<i`<esc>
+
+
+" *********  IDE DUPES ***********
+" Toggle comments with <leader> + /
+" https://stackoverflow.com/questions/1676632/whats-a-quick-way-to-comment-uncomment-lines-in-vim
+
+let s:comment_map = { 
+    \   "c": '\/\/',
+    \   "cpp": '\/\/',
+    \   "go": '\/\/',
+    \   "java": '\/\/',
+    \   "javascript": '\/\/',
+    \   "lua": '--',
+    \   "scala": '\/\/',
+    \   "php": '\/\/',
+    \   "python": '#',
+    \   "ruby": '#',
+    \   "rust": '\/\/',
+    \   "sh": '#',
+    \   "desktop": '#',
+    \   "fstab": '#',
+    \   "conf": '#',
+    \   "profile": '#',
+    \   "bashrc": '#',
+    \   "bash_profile": '#',
+    \   "mail": '>',
+    \   "eml": '>',
+    \   "bat": 'REM',
+    \   "ahk": ';',
+    \   "vim": '"',
+    \   "tex": '%',
+    \ }
+
+function! ToggleComment()
+    if has_key(s:comment_map, &filetype)
+        let comment_leader = s:comment_map[&filetype]
+        if getline('.') =~ "^\\s*" . comment_leader . " " 
+            " Uncomment the line
+            execute "silent s/^\\(\\s*\\)" . comment_leader . " /\\1/"
+        else 
+            if getline('.') =~ "^\\s*" . comment_leader
+                " Uncomment the line
+                execute "silent s/^\\(\\s*\\)" . comment_leader . "/\\1/"
+            else
+                " Comment the line
+                execute "silent s/^\\(\\s*\\)/\\1" . comment_leader . " /"
+            end
+        end
+    else
+        echo "No comment leader found for filetype"
+    end
+endfunction
+nnoremap <leader>/ :call ToggleComment()<cr>
+vnoremap <leader>/ :call ToggleComment()<cr>
+
+
+
+" **** Shift Lines of code up or down ****
+" Swaps lines on mac only alt + k or j for up/down
+nnoremap ∆ :m .+1<CR>==
+nnoremap ˚ :m .-2<CR>==
+inoremap ∆ <Esc>:m .+1<CR>==gi
+inoremap ˚ <Esc>:m .-2<CR>==gi
+vnoremap ∆ :m '>+1<CR>gv=gv
+vnoremap ˚ :m '<-2<CR>gv=gv
+
+" This works for normal linux systems using control instead of alt.
+" nnoremap <C-K> :m .-2<CR>==
+" inoremap <C-J> <Esc>:m .+1<CR>==gi
+" inoremap <C-K> <Esc>:m .-2<CR>==gi
+" vnoremap <C-J> :m '>+1<CR>gv=gv
+" nnoremap <C-J> :m .+1<CR>==
+" vnoremap <C-K> :m '<-2<CR>gv=gv
+
+
+" Auto complete
+" Enable auto completion menu after pressing TAB.
+set wildmenu
+
+" Make wildmenu behave like similar to Bash completion.
+set wildmode=list:longest
+
+" There are certain files that we would never want to edit with Vim.
+" Wildmenu will ignore files with these extensions.
+set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
+
+
+" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+
+" PLUGINS
+"
+"" Install vim-plug if not found
+
+" plugin configs for coc))))))))))))))))))))))))))))))))))))))))))))))))
+" ***********************************************************************
+" ***********************************************************************
+" ***********************************************************************
+" ***********************************************************************
+"
+" May need for Vim (not Neovim) since coc.nvim calculates byte offset by count
+" utf-8 byte sequence
+set encoding=utf-8
+" Some servers have issues with backup files, see #649
+set nobackup
+set nowritebackup
+
+" Having longer updatetime (default is 4000 ms = 4s) leads to noticeable
+" delays and poor user experience
+set updatetime=300
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved
+set signcolumn=yes
+
+" Use tab for trigger completion with characters ahead and navigate
+" NOTE: There's always complete item selected by default, you may want to enable
+" no select by `"suggest.noselect": true` in your configuration file
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s)
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Applying code actions to the selected code block
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying code actions at the cursor position
+nmap <leader>ac  <Plug>(coc-codeaction-cursor)
+" Remap keys for apply code actions affect whole buffer
+nmap <leader>as  <Plug>(coc-codeaction-source)
+" Apply the most preferred quickfix action to fix diagnostic on the current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Remap keys for applying refactor code actions
+nmap <silent> <leader>re <Plug>(coc-codeaction-refactor)
+xmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
+nmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
+
+" Run the Code Lens action on the current line
+nmap <leader>cl  <Plug>(coc-codelens-action)
+
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+" Remap <C-f> and <C-b> to scroll float windows/popups
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
+
+" Use CTRL-S for selections ranges
+" Requires 'textDocument/selectionRange' support of language server
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)
+
+" Add `:Format` command to format current buffer
+command! -nargs=0 Format :call CocActionAsync('format')
+
+" Add `:Fold` command to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer
+command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
+
+" Add (Neo)Vim's native statusline support
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+" ***********************************************************************
+" ***********************************************************************
+" ***********************************************************************
+" plugin configs for coc))))))))))))))))))))))))))))))))))))))))))))))))
+
+
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
+
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | source $MYVIMRC
+\| endif
+
+" set the runtime path to include Vundle and initialize
+call plug#begin()
+" NERD tree will be loaded on the first invocation of NERDTreeToggle command
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'terryma/vim-smooth-scroll' "nice scrolling
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim' " fuzzy finder --> ;
+Plug 'mattn/emmet-vim' " html/css/js autocompletion
+Plug 'dense-analysis/ale' " linter
+call plug#end()"
+
+" Plug 'terryma/vim-multiple-cursors' " multiple cursors
+"   Plugin 'preservim/nerdtree' "file explorer
+
+" fuzzy finder activate
+map ; :Files<CR>
+" adding additional lint tools for ale / can use eslint configs
+let b:ale_linters = ['pyflakes', 'flake8', 'pylint']
+

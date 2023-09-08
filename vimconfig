@@ -1,19 +1,3 @@
-
-" Added IDE motions to classic vim
-" -----------------------------------------
-" - line/block shifting up/down
-" - comment lines/blocks with <leader> + /
-" - file aware tabbing
-" - Hitting enter after a first curly brace puts cursor in the code block
-
-
-" Custom Mappings
-" --------------------------------------------
-" - Screen splitting with control + movement keys
-" - tn toggles relative vs absolute numbering
-" - Adding two quotes or brackets etc. will place cursor in the center
-" - Y yanks from cursor to end of line
-
 " Index: use the search functionality to skip around by typing
 " 		:/insert_setting_name  in normal mode and hit 'n' to continue.
 "
@@ -22,6 +6,7 @@
 " 		BASICS: skip to config supported by vim without any plugins
 " 		IDE: skip to the section that mimics some ide features
 " 		PLUGINS: skip to the plugin section
+
 
 " Notes:
 " - To use backups a directory needs to be made for ~/.vim/backup
@@ -47,6 +32,26 @@
 "  	User 3: Some combination of the above. If you are fanatical about vim
 "  	there may be something here to grab, but you should also be caught up
 "  	on neovim and might be far past this.
+" Added IDE motions to classic vim
+" -----------------------------------------
+" - line/block shifting up/down
+" - comment lines/blocks with <leader> + /
+" - Hitting enter after a first curly brace puts cursor in the code block
+" - Indenting highlighted code with tab and shift tab is supported
+
+
+" Custom Mappings
+" --------------------------------------------
+" - Screen splitting with control + movement keys
+" - tn toggles relative vs absolute numbering
+" - Adding two quotes or brackets etc. will place cursor in the center
+" - Y yanks from cursor to end of line
+" - jj exits normal mode like <esc>
+" - exiting with contol z is turned off to prevent accidental exits when undoing
+" - mouse selections are allowed in normal mode
+" - backspacing to delete is allowed in normal mode
+" - :DiffOrig is native to vim as a default usually, but worth mentioning nonetheless.
+" - Lots of splitscreen mapping, investigate down below.
 
 
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -171,8 +176,6 @@ if version >= 703
 endif
 
 
-
-
 " ----style---------
 set background=dark
 hi CursorLine term=bold cterm=bold guibg=Grey40 ctermbg=none ctermfg=none
@@ -187,6 +190,7 @@ set hidden              " make a buffer hidden while editing another one.
 set history=200			" keep 200 lines of command line history
 set ttimeout			" time out for key codes
 set ttimeoutlen=100		" wait up to 100ms after Esc for special key
+set clipboard+=unamed   " use system clipboard
 
 
 " ----input----
@@ -235,6 +239,9 @@ set pastetoggle=<F11>
 " Make cursor keys ignore wrapping
 inoremap <silent> <Down> <C-R>=pumvisible() ? "\<lt>Down>" : "\<lt>C-O>gj"<CR>
 inoremap <silent> <Up> <C-R>=pumvisible() ? "\<lt>Up>" : "\<lt>C-O>gk"<CR>
+
+" go to the class definition
+nmap gh gg<Action>(MethodDown)mxz<CR>5<C-y>`X
 
 
 " ----lines----
@@ -318,6 +325,9 @@ nnoremap <BS> x
 " =========== NEXT | IDE ===================================================
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+" IMPORTANT: Use this for ideavim so that selecting text in insert mode
+" doesn't kick the editor back into normal mode.
+" set selectmode=mouse,key,cmd,ideaselection
 
 " ******************************************
 " ***** Intellij or VScode disclaimer ******
@@ -493,163 +503,4 @@ inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 " Make <CR> to accept selected completion item or notify coc.nvim to format
 " <C-g>u breaks current undo, please make your own choice
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
-
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" GoTo code navigation
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window
-nnoremap <silent> K :call ShowDocumentation()<CR>
-
-function! ShowDocumentation()
-  if CocAction('hasProvider', 'hover')
-    call CocActionAsync('doHover')
-  else
-    call feedkeys('K', 'in')
-  endif
-endfunction
-
-" Highlight the symbol and its references when holding the cursor
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Symbol renaming
-nmap <leader>rn <Plug>(coc-rename)
-
-" Formatting selected code
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s)
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
-" Applying code actions to the selected code block
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-" Remap keys for applying code actions at the cursor position
-nmap <leader>ac  <Plug>(coc-codeaction-cursor)
-" Remap keys for apply code actions affect whole buffer
-nmap <leader>as  <Plug>(coc-codeaction-source)
-" Apply the most preferred quickfix action to fix diagnostic on the current line
-nmap <leader>qf  <Plug>(coc-fix-current)
-
-" Remap keys for applying refactor code actions
-nmap <silent> <leader>re <Plug>(coc-codeaction-refactor)
-xmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
-nmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
-
-" Run the Code Lens action on the current line
-nmap <leader>cl  <Plug>(coc-codelens-action)
-
-" Map function and class text objects
-" NOTE: Requires 'textDocument.documentSymbol' support from the language server
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap af <Plug>(coc-funcobj-a)
-xmap ic <Plug>(coc-classobj-i)
-omap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)
-
-" Remap <C-f> and <C-b> to scroll float windows/popups
-if has('nvim-0.4.0') || has('patch-8.2.0750')
-  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-endif
-
-" Use CTRL-S for selections ranges
-" Requires 'textDocument/selectionRange' support of language server
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
-
-" Add `:Format` command to format current buffer
-command! -nargs=0 Format :call CocActionAsync('format')
-
-" Add `:Fold` command to fold current buffer
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" Add `:OR` command for organize imports of the current buffer
-command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
-
-" Add (Neo)Vim's native statusline support
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-
-
-" *****************************************************
-" VIM PLUG CONFIG *************************************
-" *****************************************************
-"
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-endif
-
-" Run PlugInstall if there are missing plugins
-autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-  \| PlugInstall --sync | source $MYVIMRC
-\| endif
-
-" set the runtime path to include Vundle and initialize
-call plug#begin()
-" NERD tree will be loaded on the first invocation of NERDTreeToggle command
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'terryma/vim-smooth-scroll' "nice scrolling
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim' " fuzzy finder --> ;
-Plug 'mattn/emmet-vim' " html/css/js autocompletion
-Plug 'dense-analysis/ale' " linter
-call plug#end()"
-
-" Plug 'terryma/vim-multiple-cursors' " multiple cursors
-" Plug 'preservim/nerdtree' "file explorer
-
-" fuzzy finder activate
-map ; :Files<CR>
-
-" adding additional lint tools for ale / can use eslint configs
-let b:ale_linters = ['pyflakes', 'flake8', 'pylint']
-
-
 

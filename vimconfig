@@ -190,7 +190,6 @@ set hidden              " make a buffer hidden while editing another one.
 set history=200			" keep 200 lines of command line history
 set ttimeout			" time out for key codes
 set ttimeoutlen=100		" wait up to 100ms after Esc for special key
-set clipboard+=unamed   " use system clipboard
 
 
 " ----input----
